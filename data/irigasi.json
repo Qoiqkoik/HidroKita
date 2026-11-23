@@ -1,0 +1,52 @@
+{
+  "stages": [
+    {
+      "name": "1. Penyemaian",
+      "min_tds": 300,
+      "max_tds": 500,
+      "min_ph": 5.5,
+      "max_ph": 6.5,
+      "description": "Benih diletakkan pada media rockwool basah."
+    },
+    {
+      "name": "2. Berkecambah",
+      "min_tds": 400,
+      "max_tds": 600,
+      "min_ph": 5.5,
+      "max_ph": 6.5,
+      "description": "Tunas daun pertama muncul, akar mulai menembus rockwool."
+    },
+    {
+      "name": "3. Pindah Tanam",
+      "min_tds": 600,
+      "max_tds": 800,
+      "min_ph": 5.8,
+      "max_ph": 6.2,
+      "description": "Bibit dipindahkan ke netpot di sistem pipa NFT."
+    },
+    {
+      "name": "4. Vegetatif Awal",
+      "min_tds": 800,
+      "max_tds": 1000,
+      "min_ph": 5.8,
+      "max_ph": 6.2,
+      "description": "Daun sejati tumbuh lebat, kebutuhan nutrisi AB Mix meningkat."
+    },
+    {
+      "name": "5. Vegetatif Maksimal",
+      "min_tds": 1000,
+      "max_tds": 1200,
+      "min_ph": 5.8,
+      "max_ph": 6.2,
+      "description": "Tanaman membesar pesat, perhatikan kestabilan pH dan TDS."
+    },
+    {
+      "name": "6. Siap Panen",
+      "min_tds": 1000,
+      "max_tds": 1200,
+      "min_ph": 5.8,
+      "max_ph": 6.2,
+      "description": "Selada segar dan rimbun siap dipanen!"
+    }
+  ]
+}

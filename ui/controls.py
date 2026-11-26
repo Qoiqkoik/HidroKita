@@ -33,24 +33,15 @@ class Button:
 
 class ControlPanel:
     def __init__(self):
-        # Tombol kontrol TDS (Nutrisi)
-        self.btn_tds_minus = Button(40, 265, 45, 32, "-100", (239, 68, 68), (220, 38, 38))
-        self.btn_tds_plus = Button(195, 265, 45, 32, "+100", (34, 197, 94), (22, 163, 74))
-
-        # Tombol kontrol pH Air
-        self.btn_ph_minus = Button(40, 335, 45, 32, "-0.2", (239, 68, 68), (220, 38, 38))
-        self.btn_ph_plus = Button(195, 335, 45, 32, "+0.2", (34, 197, 94), (22, 163, 74))
-
-        # Tombol Navigasi Tahap & Aksi
-        self.btn_next = Button(30, 460, 115, 42, "Lanjut >", (245, 158, 11), (217, 119, 6))
-        self.btn_reset = Button(155, 460, 105, 42, "Reset", (100, 116, 139), (71, 85, 105))
-        self.btn_harvest = Button(30, 515, 230, 44, "Panen Sekarang!", (16, 185, 129), (5, 150, 105))
-        self.btn_harvest.enabled = False
+        self.btn_previous = Button(
+            30, 515, 105, 42, "Sebelumnya",
+            (100, 116, 139), (71, 85, 105)
+        )
+        self.btn_next = Button(
+            150, 515, 105, 42, "Berikutnya",
+            (59, 130, 246), (37, 99, 235)
+        )
 
     def draw(self, surface, font):
-        for btn in [
-            self.btn_tds_minus, self.btn_tds_plus,
-            self.btn_ph_minus, self.btn_ph_plus,
-            self.btn_next, self.btn_reset, self.btn_harvest
-        ]:
+        for btn in (self.btn_previous, self.btn_next):
             btn.draw(surface, font)

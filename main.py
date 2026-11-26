@@ -25,6 +25,10 @@ def main():
 
     # Tahap yang sedang ditampilkan
     current_stage = 0
+    tds = 400
+    ph = 6.0
+    health = 95.0
+    score = 0
 
     running = True
     while running:
@@ -33,30 +37,50 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    current_stage = max(0, current_stage - 1)
-                elif event.key == pygame.K_RIGHT:
-                    current_stage = min(len(stages) - 1, current_stage + 1)
-            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                selected_stage = dashboard.stage_at_position(event.pos, len(stages))
-                if selected_stage is not None:
-                    current_stage = selected_stage
-                elif controls.btn_previous.is_clicked(event):
-                    current_stage = max(0, current_stage - 1)
-                elif controls.btn_next.is_clicked(event):
-                    current_stage = min(len(stages) - 1, current_stage + 1)
 
-        controls.btn_previous.enabled = current_stage > 0
-        controls.btn_next.enabled = current_stage < len(stages) - 1
-        weather = weather_data[min(current_stage, len(weather_data) - 1)]
+            if controls.btn_tds_minus.is_clicked(event):
+                tds = max(100, tds - 100)
+            elif controls.btn_tds_plus.is_clicked(event):
+                tds = min(1800, tds + 100)
+            elif controls.btn_ph_minus.is_clicked(event):
+                ph = round(max(4.0, ph - 0.2), 1)
+            elif controls.btn_ph_plus.is_clicked(event):
+                ph = round(min(8.5, ph + 0.2), 1)
+            elif controls.btn_next.is_clicked(event):
+                if current_stage < len(stages) - 1:
+                    current_stage += 1
+                    score += int(health // 5)
+            elif controls.btn_reset.is_clicked(event):
+                current_stage = 0
+                tds = 400
+                ph = 6.0
+                health = 95.0
+            elif controls.btn_harvest.is_clicked(event):
+                score += int(health * 2)
+                current_stage = 0
+                tds = 400
+                ph = 6.0
+                health = 95.0
+
+        # Update status tombol aksi
+        controls.btn_next.enabled = (current_stage < len(stages) - 1) and (health > 20)
+        controls.btn_harvest.enabled = (current_stage == len(stages) - 1) and (health >= 50)
+
+        # Logika kesehatan tanaman berdasarkan kesesuaian TDS dan pH
+        tds_ok = stage_info["min_tds"] <= tds <= stage_info["max_tds"]
+        ph_ok = stage_info["min_ph"] <= ph <= stage_info["max_ph"]
+
+        if tds_ok and ph_ok:
+            health = min(100.0, health + 4.0 * dt)
+        else:
+            health = max(10.0, health - 6.0 * dt)
 
         # Update animasi grafis
         scene.update(dt, is_pumping=True)
 
         # Render seluruh layar
-        scene.draw(screen, current_stage, 100.0, weather)
-        dashboard.draw(screen, stages, current_stage, weather)
+        scene.draw(screen, current_stage, health, weather)
+        dashboard.draw(screen, stages, current_stage, tds, ph, health, score, weather)
         controls.draw(screen, dashboard.font_small)
 
         pygame.display.flip()

@@ -28,7 +28,6 @@ def main():
     tds = 400
     ph = 6.0
     health = 95.0
-    score = 0
 
     running = True
     while running:
@@ -52,14 +51,12 @@ def main():
             elif controls.btn_next.is_clicked(event):
                 if current_stage < len(stages) - 1:
                     current_stage += 1
-                    score += int(health // 5)
             elif controls.btn_reset.is_clicked(event):
                 current_stage = 0
                 tds = 400
                 ph = 6.0
                 health = 95.0
             elif controls.btn_harvest.is_clicked(event):
-                score += int(health * 2)
                 current_stage = 0
                 tds = 400
                 ph = 6.0
@@ -83,7 +80,7 @@ def main():
 
         # Render seluruh layar
         scene.draw(screen, current_stage, health, weather)
-        dashboard.draw(screen, stages, current_stage, tds, ph, health, score, weather)
+        dashboard.draw(screen, stages, current_stage, tds, ph, health, weather)
         controls.draw(screen, dashboard.font_small)
 
         pygame.display.flip()

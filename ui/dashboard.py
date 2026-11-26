@@ -7,18 +7,13 @@ class Dashboard:
         self.font_bold = pygame.font.SysFont("arial", 14, bold=True)
         self.font_small = pygame.font.SysFont("arial", 12, bold=True)
 
-    def draw(self, surface, stages, current_idx, tds, ph, health, score, weather):
-        # 1. Header Banner & Skor
+    def draw(self, surface, stages, current_idx, tds, ph, health, weather):
+        # 1. Header Banner
         header_rect = pygame.Rect(20, 15, 310, 42)
         pygame.draw.rect(surface, (21, 128, 61), header_rect, border_radius=12)
         pygame.draw.rect(surface, (20, 83, 45), header_rect, width=3, border_radius=12)
         title = self.font_title.render("HidroKita: Simulasi NFT", True, (255, 255, 255))
         surface.blit(title, (header_rect.x + 18, header_rect.y + 10))
-
-        score_rect = pygame.Rect(830, 15, 150, 42)
-        pygame.draw.rect(surface, (30, 41, 59), score_rect, border_radius=12)
-        score_txt = self.font_title.render(f"Skor: {score}", True, (250, 204, 21))
-        surface.blit(score_txt, (score_rect.x + 25, score_rect.y + 10))
 
         # 2. Timeline 6 Tahap Pertumbuhan (Top Bar)
         start_x = 310
